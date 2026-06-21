@@ -18,7 +18,9 @@ Install deps:
 """
 
 import base64
+import html as _html
 import os
+import re
 from datetime import datetime, timezone, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -94,7 +96,7 @@ def thread_detail(service, tid):
     if not msgs:
         return None
     msg = msgs[-1]
-    hdrs  = {h["name"].lower(): h["value"] for h in msg["payload"]["headers"]}
+    hdrs  = {h["name"].lower(): h["value"] for h in msg["payload"].get("headers", [])}
     labels = msg.get("labelIds", [])
     attachments = _attachments(msg["payload"])
     return {
@@ -118,10 +120,22 @@ def _body(payload):
             nested = _body(p)
             if nested:
                 return nested
+        # Fallback: try text/html parts when no plain-text is found
+        for p in payload["parts"]:
+            if p["mimeType"] == "text/html":
+                data = p["body"].get("data", "")
+                if data:
+                    raw = base64.urlsafe_b64decode(data).decode("utf-8", errors="replace")
+                    return re.sub(r"<[^>]+>", " ", raw).strip()
     elif payload.get("mimeType") == "text/plain":
         data = payload["body"].get("data", "")
         if data:
             return base64.urlsafe_b64decode(data).decode("utf-8", errors="replace").strip()
+    elif payload.get("mimeType") == "text/html":
+        data = payload["body"].get("data", "")
+        if data:
+            raw = base64.urlsafe_b64decode(data).decode("utf-8", errors="replace")
+            return re.sub(r"<[^>]+>", " ", raw).strip()
     return ""
 
 
@@ -147,18 +161,24 @@ def priority(t):
 def _card(t):
     color = priority(t)
     icon, border, bg, _ = COLORS[color]
-    attach = f"<li>📎 {', '.join(t['attachments'][:3])}</li>" if t["attachments"] else ""
+    attach_names = _html.escape(", ".join(t["attachments"][:3]))
+    attach = f"<li>📎 {attach_names}</li>" if t["attachments"] else ""
     unread = " <span style='color:#e74c3c;font-size:11px;'>[NON LETTO]</span>" if t["unread"] else ""
-    preview = t["body"].replace("\n", " ").replace("\r", "")[:300]
+    body_text    = t["body"].replace("\n", " ").replace("\r", "")
+    preview      = _html.escape(body_text[:300])
+    ellipsis     = "…" if len(body_text) > 300 else ""
+    subject_safe = _html.escape(t["subject"])
+    sender_safe  = _html.escape(t["sender"])
+    date_safe    = _html.escape(t["date_raw"])
     return (color, f"""
 <div style="margin-bottom:14px;padding:13px;border-left:4px solid {border};
             background:{bg};border-radius:4px;">
-  <p style="margin:0 0 3px 0;"><strong>{icon} {t['subject']}</strong>{unread}</p>
+  <p style="margin:0 0 3px 0;"><strong>{icon} {subject_safe}</strong>{unread}</p>
   <p style="margin:0 0 5px 0;color:#666;font-size:12px;">
-    Da: <strong>{t['sender']}</strong> — {t['date_raw']}
+    Da: <strong>{sender_safe}</strong> — {date_safe}
   </p>
   <ul style="margin:4px 0;padding-left:16px;font-size:13px;">
-    <li>{preview}{"…" if len(preview)==300 else ""}</li>
+    <li>{preview}{ellipsis}</li>
     {attach}
   </ul>
 </div>""")
@@ -218,10 +238,10 @@ def create_draft(service, html, subject):
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    now        = datetime.now()
-    today_str  = now.strftime("%d %B %Y")
-    subject    = f"Briefing Mattutino – {today_str}"
-    label      = "Briefing Mattutino"
+    now       = datetime.now()
+    today_str = now.strftime("%d %B %Y")
+    label     = "Briefing Serale" if now.hour >= 12 else "Briefing Mattutino"
+    subject   = f"{label} – {today_str}"
 
     print(f"[briefing] Avvio — {now.strftime('%d/%m/%Y %H:%M')}")
 
