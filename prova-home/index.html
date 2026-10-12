@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yess Energia | Luce, gas, fotovoltaico e caldaie</title>
+<meta name="description" content="Luce e gas, pannelli fotovoltaici, caldaie e climatizzazione. Ci occupiamo anche delle pratiche per il Comune: SUAP, DiRi e DiCo.">
+<style>
+  :root{
+    --blu:#0b3d63; --giallo:#f5b800; --testo:#1c2430; --chiaro:#f4f7fa;
+    --foto:url("negozio.jpg");           /* <-- la tua foto del negozio, nella stessa cartella */
+  }
+  *{box-sizing:border-box;margin:0}
+  body{font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--testo)}
+  a{color:inherit}
+  .salta{position:absolute;left:-999px;background:#fff;color:#000;padding:.6rem 1rem;z-index:10}
+  .salta:focus{left:8px;top:8px}
+
+  /* Foto unica dietro barra + presentazione */
+  .testata{
+    position:relative; color:#fff; min-height:78vh; display:flex; flex-direction:column;
+    background:
+      linear-gradient(180deg,rgba(6,28,48,.80) 0%,rgba(6,28,48,.55) 45%,rgba(6,28,48,.80) 100%),
+      var(--foto) center/cover no-repeat,
+      linear-gradient(135deg,#0b3d63,#1e6f9f);      /* se la foto manca si vede questo */
+  }
+  /* Barra: trasparente sopra la foto, con velo e sfocatura leggera */
+  .barra{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    padding:.9rem 5vw; background:rgba(6,28,48,.45); backdrop-filter:blur(6px);
+    position:sticky; top:0; z-index:5;
+  }
+  .logo{font-weight:800;font-size:1.3rem;text-decoration:none;letter-spacing:.3px}
+  .logo span{color:var(--giallo)}
+  .barra nav{display:flex;gap:1.4rem;flex-wrap:wrap}
+  .barra nav a{text-decoration:none;font-weight:600;padding:.3rem 0;border-bottom:2px solid transparent}
+  .barra nav a:hover,.barra nav a:focus{border-color:var(--giallo)}
+
+  .presentazione{margin:auto;padding:4rem 5vw;max-width:880px}
+  .presentazione h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.15;margin-bottom:1rem}
+  .presentazione p{font-size:1.15rem;max-width:60ch;margin-bottom:1.6rem}
+  .tasto{display:inline-block;background:var(--giallo);color:#1a1a1a;font-weight:700;
+         padding:.85rem 1.6rem;border-radius:8px;text-decoration:none}
+  .tasto.vuoto{background:transparent;color:#fff;border:2px solid #fff;margin-left:.6rem}
+
+  section{padding:3.5rem 5vw}
+  section h2{font-size:1.8rem;color:var(--blu);margin-bottom:1.5rem}
+  .servizi{background:var(--chiaro)}
+  .griglia{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .scheda{background:#fff;border-radius:12px;padding:1.4rem;box-shadow:0 2px 10px rgba(0,0,0,.07);border-top:4px solid var(--giallo)}
+  .scheda h3{color:var(--blu);margin-bottom:.4rem}
+  .pratiche p{max-width:70ch}
+  .contatti{background:var(--blu);color:#fff}
+  .contatti h2{color:#fff}
+  footer{padding:1.5rem 5vw;font-size:.9rem;background:#071f33;color:#cfd8e0}
+  @media (max-width:600px){ .barra nav{gap:.9rem;font-size:.95rem} .tasto.vuoto{margin:.6rem 0 0} }
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+
+<header class="testata">
+  <div class="barra">
+    <a class="logo" href="#">YESS <span>ENERGIA</span></a>
+    <nav aria-label="Menu principale">
+      <a href="#servizi">Servizi</a>
+      <a href="#pratiche">Pratiche Comune</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </div>
+  <div class="presentazione" id="contenuto">
+    <h1>Luce, gas, fotovoltaico e caldaie. Tutto con un solo referente.</h1>
+    <p>Dal contratto di fornitura all'impianto installato, fino alle pratiche da presentare al Comune. Passa a trovarci in negozio.</p>
+    <a class="tasto" href="#contatti">Richiedi un preventivo</a>
+    <a class="tasto vuoto" href="#servizi">Scopri i servizi</a>
+  </div>
+</header>
+
+<main>
+  <section class="servizi" id="servizi">
+    <h2>I nostri servizi</h2>
+    <div class="griglia">
+      <article class="scheda"><h3>Luce e gas</h3><p>Offerte per casa e attività, con assistenza sul contratto.</p></article>
+      <article class="scheda"><h3>Pannelli fotovoltaici</h3><p>Progetto, installazione e pratiche per l'impianto.</p></article>
+      <article class="scheda"><h3>Caldaie</h3><p>Installazione e sostituzione, con dichiarazioni a norma.</p></article>
+      <article class="scheda"><h3>Climatizzazione</h3><p>Condizionatori e pompe di calore per casa e ufficio.</p></article>
+    </div>
+  </section>
+
+  <section class="pratiche" id="pratiche">
+    <h2>Pratiche per il Comune</h2>
+    <p>Prepariamo e inviamo noi la documentazione idraulica al SUAP, compresa la DiRi (Dichiarazione di Rispondenza) e la DiCo (Dichiarazione di Conformità). Tu non devi pensare a nulla.</p>
+  </section>
+
+  <section class="contatti" id="contatti">
+    <h2>Vieni a trovarci</h2>
+    <p>Indirizzo, telefono, orari ed email del negozio: da inserire.</p>
+  </section>
+</main>
+
+<footer>© Yess Energia · Informativa privacy (da inserire)</footer>
+</body>
+</html>
