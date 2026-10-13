@@ -14,11 +14,13 @@
 .barra-foto::before{                         /* la foto */
   content:"";
   position:absolute; inset:0; z-index:-1;
-  background:url("INCOLLA-QUI-URL-FOTO") center 35%/cover no-repeat;
+  background:url("INCOLLA-QUI-URL-FOTO") center/auto 100% no-repeat;
   opacity:.55;                               /* .25 = tenue, .70 = fortissima */
   filter:saturate(.95);
-  -webkit-mask-image:linear-gradient(105deg,transparent 8%,#000 45%,#000 100%);
-          mask-image:linear-gradient(105deg,transparent 8%,#000 45%,#000 100%);  /* bordo obliquo */
+  -webkit-mask-image:linear-gradient(105deg,transparent 12%,#000 36%,#000 64%,transparent 90%),linear-gradient(90deg,transparent 15%,#000 32%,#000 68%,transparent 85%);
+  -webkit-mask-composite:source-in;
+          mask-image:linear-gradient(105deg,transparent 12%,#000 36%,#000 64%,transparent 90%),linear-gradient(90deg,transparent 15%,#000 32%,#000 68%,transparent 85%);
+          mask-composite:intersect;
   pointer-events:none;
 }
 .barra-foto::after{                          /* velo bianco: tiene leggibili i pulsanti */
