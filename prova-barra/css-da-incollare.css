@@ -15,16 +15,16 @@
   content:"";
   position:absolute; inset:0; z-index:-1;
   background:url("INCOLLA-QUI-URL-FOTO") center 35%/cover no-repeat;
-  opacity:.17;                               /* .10 = quasi invisibile, .30 = piu' presente */
-  filter:saturate(.8);
-  -webkit-mask-image:linear-gradient(105deg,transparent 18%,#000 55%,#000 100%);
-          mask-image:linear-gradient(105deg,transparent 18%,#000 55%,#000 100%);  /* bordo obliquo */
+  opacity:.40;                               /* .25 = tenue, .55 = molto presente */
+  filter:saturate(.95);
+  -webkit-mask-image:linear-gradient(105deg,transparent 8%,#000 45%,#000 100%);
+          mask-image:linear-gradient(105deg,transparent 8%,#000 45%,#000 100%);  /* bordo obliquo */
   pointer-events:none;
 }
 .barra-foto::after{                          /* velo bianco: tiene leggibili i pulsanti */
   content:"";
   position:absolute; inset:0; z-index:-1;
-  background:linear-gradient(105deg,rgba(255,255,255,.6),rgba(255,255,255,.25) 70%);
+  background:linear-gradient(105deg,rgba(255,255,255,.35),rgba(255,255,255,.04) 70%);
   pointer-events:none;
 }
-@media (max-width:600px){ .barra-foto::before{opacity:.12} }   /* su telefono ancora piu' tenue */
+@media (max-width:600px){ .barra-foto::before{opacity:.30} }   /* su telefono ancora piu' tenue */
