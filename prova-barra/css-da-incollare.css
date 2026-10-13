@@ -14,10 +14,9 @@
 .barra-foto::before{                         /* la foto */
   content:"";
   position:absolute; inset:0; z-index:-1;
-  background:url("INCOLLA-QUI-URL-FOTO") center/auto 100% no-repeat;
+  background:url("INCOLLA-QUI-URL-FOTO") center/cover no-repeat;
   opacity:.55;                               /* .25 = tenue, .70 = fortissima */
   filter:saturate(.95);
-  clip-path:polygon(21% 0,88% 0,79% 100%,12% 100%);   /* bordi netti, inclinati (obliqua) */
   pointer-events:none;
 }
 .barra-foto::after{                          /* velo bianco: tiene leggibili i pulsanti */
@@ -30,8 +29,8 @@
    Per farla tornare indietro in modo morbido invece di ripartire di colpo,
    cambia "infinite" in "infinite alternate". */
 @keyframes zoom-barra{
-  from{background-size:auto 100%;background-position:50% 50%}
-  to  {background-size:auto 135%;background-position:62% 38%}
+  from{transform:scale(1) translate(0,0)}
+  to  {transform:scale(1.3) translate(-3%,2%)}
 }
 @media (prefers-reduced-motion:no-preference){
   .barra-foto::before{animation:zoom-barra 15s linear infinite}

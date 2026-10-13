@@ -7,19 +7,18 @@
 <style>
   :root{ --blu:#1d2a6b; --verde:#8cc63f; --pillola:#e6e9f6; --bordo:#8f97c4; --grigio:#5a6180 }
   *{box-sizing:border-box;margin:0}
-  body{font:600 1.1rem/1.3 "Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;background:#f4f6fb;color:var(--blu);padding:2rem 1rem}
-  .controllo{max-width:1180px;margin:0 auto 1rem;font:500 .95rem system-ui,sans-serif;color:#333}
+  body{font:600 1.1rem/1.3 "Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;background:#f4f6fb;color:var(--blu);padding:0}
+  .controllo{margin:0;padding:.7rem 1rem;font:500 .95rem system-ui,sans-serif;color:#333}
   .controllo label{cursor:pointer}
 
   /* ===== BARRA ===== */
-  .barra{position:relative;max-width:1180px;margin:0 auto;background:#fff;overflow:hidden;
+  .barra{position:relative;width:100%;margin:0;background:#fff;overflow:hidden;
          padding:1.5rem 1rem 2rem;text-align:center;isolation:isolate}
   /* Foto in sottoimpressione: leggera, velata, con sfumatura obliqua */
   .barra::before{
     content:"";position:absolute;inset:0;z-index:-1;
-    background:url("negozio.jpg") center/auto 100% no-repeat;
+    background:url("negozio.jpg") center/cover no-repeat;
     opacity:.55;                                   /* leggerezza: 0.15 = molto tenue, 0.35 = piu' visibile */
-    clip-path:polygon(21% 0,88% 0,79% 100%,12% 100%);   /* bordi netti, inclinati (obliqua) */
     filter:saturate(.95) blur(.4px);
     transition:opacity .3s;
   }
@@ -50,8 +49,8 @@
    Per farla tornare indietro in modo morbido invece di ripartire di colpo,
    cambia "infinite" in "infinite alternate". */
 @keyframes zoom-barra{
-  from{background-size:auto 100%;background-position:50% 50%}
-  to  {background-size:auto 135%;background-position:62% 38%}
+  from{transform:scale(1) translate(0,0)}
+  to  {transform:scale(1.3) translate(-3%,2%)}
 }
 @media (prefers-reduced-motion:no-preference){
   .barra::before{animation:zoom-barra 15s linear infinite}
