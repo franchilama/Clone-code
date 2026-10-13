@@ -1,0 +1,30 @@
+/* ===== Foto del negozio sotto la barra (velata, leggera, obliqua) =====
+   1) In WordPress: Media -> Aggiungi file -> carica "negozio-barra.webp"
+      e copia il suo indirizzo (URL file).
+   2) Sostituisci RIGA SOTTO "INCOLLA-QUI-URL-FOTO" con quell'indirizzo.
+   3) Nel contenitore della barra (logo + pulsanti) aggiungi la classe CSS:  barra-foto
+      (Elementor: Avanzate -> Classi CSS;  Gutenberg: Avanzate -> Classe CSS aggiuntiva)
+   4) Aspetto -> Personalizza -> CSS aggiuntivo: incolla questo codice e Pubblica.
+*/
+.barra-foto{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.barra-foto::before{                         /* la foto */
+  content:"";
+  position:absolute; inset:0; z-index:-1;
+  background:url("INCOLLA-QUI-URL-FOTO") center 35%/cover no-repeat;
+  opacity:.17;                               /* .10 = quasi invisibile, .30 = piu' presente */
+  filter:saturate(.8);
+  -webkit-mask-image:linear-gradient(105deg,transparent 18%,#000 55%,#000 100%);
+          mask-image:linear-gradient(105deg,transparent 18%,#000 55%,#000 100%);  /* bordo obliquo */
+  pointer-events:none;
+}
+.barra-foto::after{                          /* velo bianco: tiene leggibili i pulsanti */
+  content:"";
+  position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(105deg,rgba(255,255,255,.6),rgba(255,255,255,.25) 70%);
+  pointer-events:none;
+}
+@media (max-width:600px){ .barra-foto::before{opacity:.12} }   /* su telefono ancora piu' tenue */
