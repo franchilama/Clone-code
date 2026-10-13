@@ -7,7 +7,7 @@
 <meta name="description" content="Luce e gas, pannelli fotovoltaici, caldaie e climatizzazione. Ci occupiamo anche delle pratiche per il Comune: SUAP, DiRi e DiCo.">
 <style>
   :root{
-    --blu:#0b3d63; --giallo:#f5b800; --testo:#1c2430; --chiaro:#f4f7fa;
+    --blu:#1d2a6b; --giallo:#8cc63f; --testo:#1c2430; --chiaro:#f3f8ec;
     --foto:url("negozio.jpg");           /* <-- la tua foto del negozio, nella stessa cartella */
   }
   *{box-sizing:border-box;margin:0}
@@ -20,14 +20,14 @@
   .testata{
     position:relative; color:#fff; min-height:78vh; display:flex; flex-direction:column;
     background:
-      linear-gradient(180deg,rgba(6,28,48,.80) 0%,rgba(6,28,48,.55) 45%,rgba(6,28,48,.80) 100%),
+      linear-gradient(180deg,rgba(12,20,56,.80) 0%,rgba(12,20,56,.55) 45%,rgba(12,20,56,.80) 100%),
       var(--foto) center/cover no-repeat,
-      linear-gradient(135deg,#0b3d63,#1e6f9f);      /* se la foto manca si vede questo */
+      linear-gradient(135deg,#1d2a6b,#3a8f3a);      /* se la foto manca si vede questo */
   }
   /* Barra: trasparente sopra la foto, con velo e sfocatura leggera */
   .barra{
     display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
-    padding:.9rem 5vw; background:rgba(6,28,48,.45); backdrop-filter:blur(6px);
+    padding:.9rem 5vw; background:rgba(12,20,56,.45); backdrop-filter:blur(6px);
     position:sticky; top:0; z-index:5;
   }
   .logo{font-weight:800;font-size:1.3rem;text-decoration:none;letter-spacing:.3px}
@@ -52,7 +52,7 @@
   .pratiche p{max-width:70ch}
   .contatti{background:var(--blu);color:#fff}
   .contatti h2{color:#fff}
-  footer{padding:1.5rem 5vw;font-size:.9rem;background:#071f33;color:#cfd8e0}
+  footer{padding:1.5rem 5vw;font-size:.9rem;background:#0c1438;color:#cfd8e0}
   @media (max-width:600px){ .barra nav{gap:.9rem;font-size:.95rem} .tasto.vuoto{margin:.6rem 0 0} }
 </style>
 </head>
