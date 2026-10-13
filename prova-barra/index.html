@@ -46,6 +46,16 @@
   @media (max-width:600px){ .ico{width:54px;height:54px} .pill{font-size:1rem} }
   @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) body{background:#12141c} :root:not([data-theme="light"]) .controllo{color:#ddd} }
   :root[data-theme="dark"] body{background:#12141c} :root[data-theme="dark"] .controllo{color:#ddd}
+/* Movimento lento: la foto si ingrandisce e scorre per 15 secondi, poi ricomincia.
+   Per farla tornare indietro in modo morbido invece di ripartire di colpo,
+   cambia "infinite" in "infinite alternate". */
+@keyframes zoom-barra{
+  from{background-size:auto 100%;background-position:50% 50%}
+  to  {background-size:auto 135%;background-position:62% 38%}
+}
+@media (prefers-reduced-motion:no-preference){
+  .barra::before{animation:zoom-barra 15s linear infinite}
+}
 </style>
 </head>
 <body>

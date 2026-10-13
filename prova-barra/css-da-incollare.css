@@ -26,4 +26,14 @@
   background:linear-gradient(105deg,rgba(255,255,255,.35),rgba(255,255,255,.04) 70%);
   pointer-events:none;
 }
+/* Movimento lento: la foto si ingrandisce e scorre per 15 secondi, poi ricomincia.
+   Per farla tornare indietro in modo morbido invece di ripartire di colpo,
+   cambia "infinite" in "infinite alternate". */
+@keyframes zoom-barra{
+  from{background-size:auto 100%;background-position:50% 50%}
+  to  {background-size:auto 135%;background-position:62% 38%}
+}
+@media (prefers-reduced-motion:no-preference){
+  .barra-foto::before{animation:zoom-barra 15s linear infinite}
+}
 @media (max-width:600px){ .barra-foto::before{opacity:.45} }   /* su telefono ancora piu' tenue */
